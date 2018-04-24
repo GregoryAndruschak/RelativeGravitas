@@ -30,5 +30,3 @@ mvnw.cmd
 .mvn
 
 src/test
-
-*.properties
