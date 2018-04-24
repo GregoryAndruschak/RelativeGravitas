@@ -11,51 +11,48 @@ public class Highscores {
 
 	@Id
 	@Column(unique=true)
-	protected int ID;
+	private Long id;
 	
 	@Column(name = "gamesalltime",nullable=false)
-	protected int gamesAllTime;
+	private int gamesAllTime;
 	
 	@Column(name = "gameslastmonth",nullable=false)
-	protected int gamesLastMonth;
+	private int gamesLastMonth;
 	
 	@Column(name = "gameslastweek",nullable=false)
-	protected int gamesLastWeek;
+	private int gamesLastWeek;
 	
 	@Column(name = "deathalltime",nullable=false)
-	protected int deathAllTime;
+	private int deathAllTime;
 	
-	
-
 	@Column(name = "deathlastmonth",nullable=false)
-	protected int deathLastMonth;
+	private int deathLastMonth;
 	
 	@Column(name = "deathlastweek",nullable=false)
-	protected int deathLastWeek;
+	private int deathLastWeek;
 	
 	@Column(name = "winsalltime",nullable=false)
-	protected int winsAllTime;
+	private int winsAllTime;
 	
 	@Column(name = "winslastmonth",nullable=false)
-	protected int winsLastMonth;
+	private int winsLastMonth;
 	
-
 	@Column(name = "winslastweek",nullable=false)
-	protected int winsLastWeek;
+	private int winsLastWeek;
 	
 	@Column(name = "raiting",nullable=false)
-	protected int raiting;
+	private int raiting;
 	
 	@Column(name = "raitingmonth",nullable=false)
-	protected int raitingMonth;
+	private int raitingMonth;
 	
 	@Column(name = "raitingweek",nullable=false)
-	protected int raitingWeek;
+	private int raitingWeek;
 	
 	
 	
 	public Highscores(Highscores s) {
-		ID = s.ID;
+		id = s.id;
 		this.gamesAllTime = s.gamesAllTime;
 		this.gamesLastMonth = s.gamesLastMonth;
 		this.gamesLastWeek = s.gamesLastWeek;
@@ -73,9 +70,6 @@ public class Highscores {
 	public Highscores() {
 		super();
 	}
-
-	
-		
 
 	public int getGamesAllTime() {
 		return gamesAllTime;
@@ -174,13 +168,17 @@ public class Highscores {
 		this.raitingWeek = raitingWeek;
 	}
 
-	public int getID() {
-		return ID;
+	public Long getId() {
+		return id;
 	}
-	
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "Highscores [ID=" + ID + ", gamesAllTime=" + gamesAllTime + ", gamesLastMonth=" + gamesLastMonth
+		return "Highscores [ID=" + id + ", gamesAllTime=" + gamesAllTime + ", gamesLastMonth=" + gamesLastMonth
 				+ ", gamesLastWeek=" + gamesLastWeek + ", deathAllTime=" + deathAllTime + ", deathLastMonth="
 				+ deathLastMonth + ", deathLastWeek=" + deathLastWeek + ", winsAllTime=" + winsAllTime
 				+ ", winsLastMonth=" + winsLastMonth + ", winsLastWeek=" + winsLastWeek + ", raiting=" + raiting

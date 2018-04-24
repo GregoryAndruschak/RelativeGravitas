@@ -1,4 +1,4 @@
-package ua.kma.app.entities;
+package ua.kma.app.pojo;
 
 public class Game {
 

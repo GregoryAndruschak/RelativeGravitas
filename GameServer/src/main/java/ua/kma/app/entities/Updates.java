@@ -12,12 +12,11 @@ import javax.persistence.Table;
 public class Updates {
 
 	@Id
-	private int ID;
+	private Long id;
 
 	@Column(name = "week", nullable = false)
 	private Date lastWeekUpdate;
-	
-	
+
 	@Column(name = "month", nullable = false)
 	private Date lastMonthUpdate;
 
@@ -37,8 +36,16 @@ public class Updates {
 		this.lastMonthUpdate = lastMonthUpdate;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Updates() {
-		ID = 1;
+		id = 1L;
 		this.lastWeekUpdate = new Date(System.currentTimeMillis());
 		this.lastMonthUpdate = new Date(System.currentTimeMillis());
 	}

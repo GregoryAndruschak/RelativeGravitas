@@ -1,12 +1,9 @@
 package ua.kma.app.entities;
 
 import java.sql.Blob;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -14,7 +11,7 @@ public class User {
 
 	@Id
 	@GeneratedValue
-	private int ID;
+	private Long id;
 
 	@Column(name = "username", unique = true, length = 20,nullable=false)
 	private String username;
@@ -24,6 +21,24 @@ public class User {
 
 	@Column(name = "email", length = 100,nullable=false)
 	private String email;
+
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "high_score_id", referencedColumnName = "id")
+	private Highscores highscores;
+
+	@ManyToMany
+	@JoinTable(name="tbl_friends",
+			joinColumns=@JoinColumn(name="person_id"),
+			inverseJoinColumns=@JoinColumn(name="friend_id")
+	)
+	private List<User> friends;
+
+	@ManyToMany
+	@JoinTable(name="tbl_friends",
+			joinColumns=@JoinColumn(name="friend_id"),
+			inverseJoinColumns=@JoinColumn(name="person_id")
+	)
+	private List<User> friendOf;
 
 	public String getUsername() {
 		return username;
@@ -49,9 +64,35 @@ public class User {
 		this.email = email;
 	}
 
-	public int getID() {
-		// TODO Auto-generated method stub
-		return ID;
+	public Highscores getHighscores() {
+		return highscores;
 	}
 
+	public List<User> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
+	}
+
+	public void setHighscores(Highscores highscores) {
+		this.highscores = highscores;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<User> getFriendOf() {
+		return friendOf;
+	}
+
+	public void setFriendOf(List<User> friendOf) {
+		this.friendOf = friendOf;
+	}
 }
