@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface HighScoresRepository extends JpaRepository<Highscores, Long> {
-//    List<Highscores> getAllSortByRaiting();
+//    List<Highscores> getAllOrderByRaiting();
 //    List<Highscores> getAllOrderByRaitingMonth();
 //    List<Highscores> getAllOrderByRaitingWeek();
 }
