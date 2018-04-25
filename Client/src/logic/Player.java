@@ -30,8 +30,17 @@ public class Player {
 
 	public int health = 100;
 	public String weapon = "None";
+	public int weap = 0;
+	
+	private int[] lkm_cd = new int[4];
+	private int[] pkm_cd = new int[4];
 
 	public Player(int x, int y, int color) throws SlickException {
+		for(int i=0;i<4;i++) {
+			lkm_cd[i]=0;
+			pkm_cd[i]=0;
+		}
+		
 		this.x = x;
 		this.y = y;
 		Image s = new Image("res/player.png");
@@ -108,6 +117,44 @@ public class Player {
 		}
 		if (i == 10) {
 			current = fall_left;
+		}
+	}
+
+	public boolean weaponFired(boolean mouse) {//true = lkm, false = pkm
+		if(mouse) {
+			if(lkm_cd[weap]==0)
+				return true;
+		}
+		else {
+			if(pkm_cd[weap]==0)
+				return true;
+		}
+		return false;
+	}
+	
+	public void weaponCycle() {
+		if(lkm_cd[weap]!=0)
+			lkm_cd[weap]--;
+		if(pkm_cd[weap]!=0)
+			pkm_cd[weap]--;
+	}
+
+	public void weaponPicked(int id) {
+		weap = id;
+		if (id == 0) {
+			this.weapon = "Wave Emitter";
+		}
+		if (id == 1) {
+			this.weapon = "Grav-pistol";
+		}
+		if (id == 2) {
+			this.weapon = "Temporal Rifle";
+		}
+		if (id == 3) {
+			this.weapon = "Magnetic Pulsator";
+		}
+		if (id == 4) {
+			this.weapon = "Transdimensional Railgun";
 		}
 	}
 }

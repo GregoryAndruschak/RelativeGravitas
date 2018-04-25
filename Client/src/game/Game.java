@@ -141,9 +141,19 @@ public class Game extends BasicGameState {
 		physics(g, player);
 		player.standing = false;
 		collisions(player, map.hitboxes);
+		
+		if(input.isKeyDown(Input.MOUSE_LEFT_BUTTON)&&player.weaponFired(true)) {
+			
+		}
+		
+		if(input.isKeyDown(Input.MOUSE_RIGHT_BUTTON)&&player.weaponFired(false)) {
+			
+		}
 
 		shift_x = player.x - center_x;
 		shift_y = player.y - center_y;
+		
+		player.weaponCycle();
 	}
 
 	private void physics(int gravity, Player player) {
@@ -186,8 +196,9 @@ public class Game extends BasicGameState {
 		}
 		ArrayList<Item> items = map.getItems();
 		for(int i = 0;i<items.size();i++) {
-			if(hitbox.intersects(items.get(i).getHitbox())) {
+			if(hitbox.intersects(items.get(i).getHitbox())&&player.weap==0) {
 				items.get(i).pickUp();
+				player.weaponPicked(items.get(i).id);
 			}
 		}
 	}

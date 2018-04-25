@@ -17,10 +17,13 @@ public class Item {
 	private int heigth;
 
 	private int respawn_counter = 0;
+	
+	public int id = -1;
 
-	public Item(int x, int y, int id) throws SlickException { // id: 0 - health pack, 1 - boost, 2 - gun 1 etc
-		this.x = x;
-		this.y = y;
+	public Item(int x, int y, int id) throws SlickException { // id: 0 - boost
+		this.id = id;
+		this.x = x; //0 - wave emitter, 1 - grav-pistol, 2 - temporal rifle
+		this.y = y; //3 - magnetic pulsator, 4 - transdimensional railgun
 		this.width = 50;
 		this.heigth = 50;
 		Image s = new Image("res/items.png");
@@ -29,8 +32,8 @@ public class Item {
 		hitbox = new Rectangle(x, y, 50, 50);
 		img = ss.getSprite(id, 0);
 		
-		if(id==0) {}
-		if(id==1) {}
+		if(id==0) {this.width = 75;}
+		if(id==1) {this.width = 75;}
 		if(id==2) {this.width = 75;}
 		if(id==3) {this.width = 75;}
 		if(id==4) {this.width = 75;}
