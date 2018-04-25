@@ -13,8 +13,8 @@ import java.util.List;
 
 @SpringBootApplication
 public class AppApplication {
-//	private static UsersRepository usersRepository;
-
+	private static UsersRepository usersRepository;
+//
 //	@Autowired
 //	public void setUsersRepository(UsersRepository usersRepository) {
 //		AppApplication.usersRepository = usersRepository;
