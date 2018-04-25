@@ -41,4 +41,8 @@ public class UsersServiceImpl {
     public Long getIdByName(String userName) {
         return usersRepository.getUserByUsernameEquals(userName).getId();
     }
+
+    public void saveUser(User user) {
+        usersRepository.save(user);
+    }
 }

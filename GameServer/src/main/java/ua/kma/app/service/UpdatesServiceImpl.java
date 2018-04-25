@@ -1,5 +1,6 @@
 package ua.kma.app.service;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import ua.kma.app.entities.Updates;
 import ua.kma.app.repository.UpdatesRepository;

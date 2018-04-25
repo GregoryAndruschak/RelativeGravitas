@@ -1,16 +1,13 @@
 package ua.kma.app.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "highscores")
 public class Highscores {
 
 	@Id
-	@Column(unique=true)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "gamesalltime",nullable=false)

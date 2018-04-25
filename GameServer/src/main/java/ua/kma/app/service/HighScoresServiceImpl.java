@@ -1,11 +1,14 @@
 package ua.kma.app.service;
 
+import org.hibernate.criterion.Order;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.kma.app.entities.Highscores;
 import ua.kma.app.entities.User;
 import ua.kma.app.repository.HighScoresRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class HighScoresServiceImpl {
@@ -18,29 +21,26 @@ public class HighScoresServiceImpl {
     public Highscores getHighscoresByID(Long id) {
         return highScoresRepository.getOne(id);
     }
-//TODO fix orderBy
+
     public Long getIdOfBestUserAllTime() {
-        List list = highScoresRepository.findAll();
-//        List list = highScoresRepository.getAllOrderByRaiting();
-        if(list.isEmpty()) return -1L;
-        else return ((Highscores)list.get(0)).getId();
+        List<Highscores> highScores= highScoresRepository.getAllOrderByRaiting();
+        if(highScores.isEmpty()) return -1L;
+        else return (highScores.get(0)).getId();
     }
 
     public Long getIdOfBestUserLastMonth() {
-        List list = highScoresRepository.findAll();
-//        List list = highScoresRepository.getAllOrderByRaitingMonth();
+        List list = highScoresRepository.getAllOrderByRaitingMonth();
         if(list.isEmpty()) return -1L;
         else return ((User)list.get(0)).getId();
     }
 
     public Long getIdOfBestUserLastWeek() {
-        List list = highScoresRepository.findAll();
-//        List list = highScoresRepository.getAllOrderByRaitingWeek();
+        List list = highScoresRepository.getAllOrderByRaitingWeek();
         if(list.isEmpty()) return -1L;
         else return ((User)list.get(0)).getId();
     }
 
-    public List<Highscores> getAllUsers() {
+    public List<Highscores> getAllHighScores() {
         return highScoresRepository.findAll();
     }
 

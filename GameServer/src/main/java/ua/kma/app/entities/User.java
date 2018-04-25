@@ -10,14 +10,14 @@ import javax.persistence.*;
 public class User {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name = "username", unique = true, length = 20,nullable=false)
 	private String username;
 
 	@Column(name = "password",nullable=false)
-	private Blob password;
+	private String password;
 
 	@Column(name = "email", length = 100,nullable=false)
 	private String email;
@@ -26,14 +26,14 @@ public class User {
 	@JoinColumn(name = "high_score_id", referencedColumnName = "id")
 	private Highscores highscores;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="tbl_friends",
 			joinColumns=@JoinColumn(name="person_id"),
 			inverseJoinColumns=@JoinColumn(name="friend_id")
 	)
 	private List<User> friends;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="tbl_friends",
 			joinColumns=@JoinColumn(name="friend_id"),
 			inverseJoinColumns=@JoinColumn(name="person_id")
@@ -48,12 +48,12 @@ public class User {
 		this.username = nick;
 	}
 
-	public Blob getPassword() {
+	public String getPassword() {
 		return password;
 	}
 
-	public void setPassword(Blob pass) {
-		this.password = pass;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getEmail() {
