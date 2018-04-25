@@ -3,19 +3,19 @@ package ua.kma.app.pojo;
 public class Game {
 
 	// First command
-	private int id11;
-	private int id12;
+	private Long id11;
+	private Long id12;
 
 	// Second command
-	private int id21;
-	private int id22;
+	private Long id21;
+	private Long id22;
 
 	private int deaths11;
 	private int deaths12;
 	private int deaths21;
 	private int deaths22;
 
-	public Game(int id11, int id12, int id21, int id22) {
+	public Game(Long id11, Long id12, Long id21, Long id22) {
 		this.id11 = id11;
 		this.id12 = id12;
 
@@ -49,6 +49,27 @@ public class Game {
 	public int getDeaths22() {
 		return deaths22;
 	}
-	
-	
+
+	public Long getId11() {
+		return id11;
+	}
+
+
+	public Long getId12() {
+		return id12;
+	}
+
+
+
+	public Long getId21() {
+		return id21;
+	}
+
+
+
+	public Long getId22() {
+		return id22;
+	}
+
+
 }
