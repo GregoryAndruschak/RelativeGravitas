@@ -1,6 +1,8 @@
 package ua.kma.app.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ua.kma.app.AppApplication;
 import ua.kma.app.entities.User;
 import ua.kma.app.repository.UsersRepository;
 
@@ -45,4 +47,5 @@ public class UsersServiceImpl {
     public void saveUser(User user) {
         usersRepository.save(user);
     }
+
 }

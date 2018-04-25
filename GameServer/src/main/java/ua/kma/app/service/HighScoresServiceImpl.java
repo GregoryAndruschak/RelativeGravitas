@@ -1,6 +1,7 @@
 package ua.kma.app.service;
 
 import org.hibernate.criterion.Order;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ua.kma.app.entities.Highscores;

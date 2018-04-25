@@ -38,7 +38,7 @@ public class Highscores {
 	private int winsLastWeek;
 	
 	@Column(name = "raiting",nullable=false)
-	private int raiting;
+	private int raiting = 1000;
 	
 	@Column(name = "raitingmonth",nullable=false)
 	private int raitingMonth;
