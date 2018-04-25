@@ -120,7 +120,7 @@ public class Player {
 		}
 	}
 
-	public boolean weaponFired(boolean mouse) {//true = lkm, false = pkm
+	public boolean weaponReady(boolean mouse) {//true = lkm, false = pkm
 		if(mouse) {
 			if(lkm_cd[weap]==0)
 				return true;
@@ -130,6 +130,11 @@ public class Player {
 				return true;
 		}
 		return false;
+	}
+	
+	public Bullet fireWeapon(Vector v, boolean lkm) {
+		Bullet b = new Bullet(weap,v);
+		return b;
 	}
 	
 	public void weaponCycle() {
