@@ -96,6 +96,18 @@ public class DataBase {
         return usersRepository.getUserByEmailEqualsAndPasswordEquals(email,pass);
     }
 
+    public boolean containUserWithId(Long id){
+        return usersService.containsUserWithId(id);
+    }
+
+    public boolean containUserWithNickname(String name){
+        return  usersService.containsUserWithName(name);
+    }
+
+    public boolean containUserWithEmail(String email){
+        return  usersService.containsUserWithEmail(email);
+    }
+
     public void test(){
         System.out.print(updatesService!=null&&highScoresService!=null&&usersService!=null);
 

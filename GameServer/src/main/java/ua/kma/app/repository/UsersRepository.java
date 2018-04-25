@@ -9,4 +9,5 @@ public interface UsersRepository extends JpaRepository<User,Long> {
     User getUserByUsernameEquals(String userName);
     User getUserByUsernameEqualsAndPasswordEquals(String username, String password);
     User getUserByEmailEqualsAndPasswordEquals(String email, String password);
+    User getUserByEmailEquals(String email);
 }

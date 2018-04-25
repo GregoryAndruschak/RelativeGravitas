@@ -36,6 +36,10 @@ public class UsersServiceImpl {
         return getUserByUsername(name) != null;
     }
 
+    public boolean containsUserWithEmail(String email){
+        return usersRepository.getUserByEmailEquals(email) != null;
+    }
+
     public List<User> getAllUsers() {
         return usersRepository.findAll();
     }
