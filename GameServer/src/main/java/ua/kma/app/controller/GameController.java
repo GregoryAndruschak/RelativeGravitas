@@ -26,10 +26,10 @@ public class GameController {
 
     @SendTo("/topic/game_init")
     private ArrayList<GameState> sendInitStates() throws Exception{
-        GameState gs1 = new GameState(usernames.get(0), 0, 0, false, true);
-        GameState gs2 = new GameState(usernames.get(1), 0, 0, false, true);
-        GameState gs3 = new GameState(usernames.get(2), 0, 0, false, true);
-        GameState gs4 = new GameState(usernames.get(3), 0, 0, false, true);
+        GameState gs1 = new GameState(usernames.get(0), 0, 0, 0,false, true, false, true, false, false);
+        GameState gs2 = new GameState(usernames.get(1), 0, 0, 0,false, true, false, true, false, false);
+        GameState gs3 = new GameState(usernames.get(2), 0, 0, 0,false, true, false, true, false, false);
+        GameState gs4 = new GameState(usernames.get(3), 0, 0, 0,false, true, false, true, false, false);
         gameStates.add(gs1);
         gameStates.add(gs2);
         gameStates.add(gs3);
