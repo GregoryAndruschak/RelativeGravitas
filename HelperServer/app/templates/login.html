@@ -6,7 +6,8 @@
 {% else %}
 <form class="form-signin" method="POST" name="login" action="/login">
     {{ form.hidden_tag() }}
-    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+{#    <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">#}
+    <h1>Relative Gravitas</h1>
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     {% for message in messages %}
