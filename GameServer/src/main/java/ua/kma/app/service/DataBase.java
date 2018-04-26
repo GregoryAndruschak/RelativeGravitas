@@ -12,6 +12,7 @@ import ua.kma.app.repository.UsersRepository;
 
 import java.util.List;
 
+@Service
 public class DataBase {
 
     private static UsersRepository usersRepository;
@@ -25,6 +26,7 @@ public class DataBase {
     @Autowired
     public void setUsersRepository(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
+
         usersService = new UsersServiceImpl(usersRepository);
     }
 
@@ -51,7 +53,7 @@ public class DataBase {
         }
         if(System.currentTimeMillis() - updatesService.getLastMonthUpdate().getTime() >= millisInMonth){
             updatesService.setLastMonthUpdateNow();
-            highScoresService.updateAfterMonth();;
+            highScoresService.updateAfterMonth();
         }
     }
 
@@ -109,8 +111,10 @@ public class DataBase {
     }
 
     public void test(){
-        System.out.print(updatesService!=null&&highScoresService!=null&&usersService!=null);
+//        System.out.println(usersService!=null);
 
+//        System.out.println(containUserWithEmail("andriy.nau@gmail.com"));
+        System.out.println(getAllUsers());
     }
 
 
