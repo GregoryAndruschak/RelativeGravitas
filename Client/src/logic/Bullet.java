@@ -18,9 +18,9 @@ public class Bullet {
 
 	Image black = new Image("res/black.png");
 
-	Rectangle hitbox;
+	public Rectangle hitbox;
 
-	int decay = 0;
+	public int decay = 0;
 
 	public Bullet(int id, Vector v, int x, int y) throws SlickException { // id: 0 - rocket, 1 - pistol bullet, 2 -
 																			// rifle bullet
@@ -39,25 +39,43 @@ public class Bullet {
 			width = 26;
 			height = 20;
 			decay = 1000;
+			v.setV(10);
 			
 		}
 		if (id == 1) {
 			img = ss.getSubImage(14, 0, 20, 10);
-			width = 30;
-			height = 15;
+			width = 26;
+			height = 20;
 			decay = 60;
+			v.setV(7);
 		}
 		if (id == 2) {
 			img = ss.getSubImage(35, 0, 15, 9);
+			width = 30;
+			height = 18;
+			decay = 20;
+			v.setV(9);
 		}
 		if (id == 3) {
 			img = ss.getSubImage(60, 0, 8, 25);
+			width = 16;
+			height = 50;
+			decay = 20;
+			v.setV(8);
 		}
 		if (id == 4) {
 			img = ss.getSubImage(69, 0, 17, 17);
+			width = 34;
+			height = 34;
+			decay = 300;
+			v.setV(3);
 		}
 		if (id == 5) {
 			img = ss.getSubImage(0, 12, 59, 13);
+			width = 900;
+			height = 40;
+			decay = 25;
+			v.setV(0);
 		}
 		
 		float degree = (float) Math.toDegrees(Math.atan(v.getTg()));

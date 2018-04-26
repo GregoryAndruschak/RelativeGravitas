@@ -35,14 +35,16 @@ public class Game extends BasicGameState {
 
 	int g = 5;
 	int jtime = 0;
-	
+
 	int death_count = 0;
 
 	SpriteSheet pss;
-	
+
 	Map map;
-	
+
 	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+
+	boolean picking_up = false;
 
 	public Game(int state) {
 
@@ -50,31 +52,32 @@ public class Game extends BasicGameState {
 
 	@Override
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		player = new Player(0,0,2);
+		player = new Player(0, 0, 2);
 		ph1 = new Image("res/white.png");
 		black = new Image("res/black.png");
 		map = new Map();
 		gc.getGraphics().setColor(Color.black);
-		
+
 	}
 
 	@Override
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		ph1.draw(0, 0, 3000, 2000);
 		g.drawString(player.x + " " + player.y, 0, 0);
-		//g.drawString("left " + player.left + " right " + player.right + " moving " + player.moving + " standing "
-		//		+ player.standing + " jumping " + jumping, 0, 50);
-		g.drawString("Deaths: "+ death_count, 30, 100);
+		// g.drawString("left " + player.left + " right " + player.right + " moving " +
+		// player.moving + " standing "
+		// + player.standing + " jumping " + jumping, 0, 50);
+		g.drawString("Deaths: " + death_count, 30, 100);
 		player.current.draw(center_x, center_y, 75, 100);
-		
+
 		map.draw(shift_x, shift_y);
-		
+
 		g.drawString("Health: " + player.health + "/100", 400, 20);
 		g.drawString("Weapon: " + player.weapon, 400, 50);
-		
-		for(int i = 0;i<bullets.size();i++) {
+
+		for (int i = 0; i < bullets.size(); i++) {
 			Bullet b = bullets.get(i);
-			if(!b.cycle()) {
+			if (!b.cycle()) {
 				bullets.remove(i);
 				break;
 			}
@@ -84,7 +87,7 @@ public class Game extends BasicGameState {
 
 	@Override
 	public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-		
+
 		Input input = gc.getInput();
 
 		player.moving = false;
@@ -156,27 +159,29 @@ public class Game extends BasicGameState {
 		physics(g, player);
 		player.standing = false;
 		collisions(player, map.hitboxes);
-		
-		if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)&&player.weaponReady(true)) {
-			Vector v = new Vector(center_x+40,center_y+60,input.getMouseX(),input.getMouseY(),10);
-			Bullet b = player.fireWeapon(v, true, player.x, player.y);
+
+		if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && player.weaponReady(true)) {
+			Vector v = new Vector(center_x + 38, center_y + 50, input.getMouseX(), input.getMouseY(), 10);
+			Bullet b = player.fireWeapon(v, true, player.x + 101, player.y + 30);
 			bullets.add(b);
-			System.out.println(bullets.size());
 		}
-		
-		if(input.isKeyDown(Input.MOUSE_RIGHT_BUTTON)&&player.weaponReady(false)) {
-			
+
+		if (input.isMouseButtonDown(Input.MOUSE_RIGHT_BUTTON) && player.weaponReady(false)) {
+
 		}
+
+		if (input.isKeyPressed(Input.KEY_E)) {
+			picking_up = true;
+		}
+
+		player.x += player.v.dx;
+		player.y += player.v.dy;
 
 		shift_x = player.x - center_x;
 		shift_y = player.y - center_y;
-		
+
 		player.weaponCycle();
-		
-		
-		
-		
-		
+		player.normalize();
 	}
 
 	private void physics(int gravity, Player player) {
@@ -194,13 +199,13 @@ public class Game extends BasicGameState {
 			boolean down = hitbox.getY() + (j_vel + 2) <= b.getY() + b.getHeight();
 
 			if (hitbox.intersects(borders.get(i))) {
-				if(i==0) {
+				if (i == 0) {
 					death_count++;
 					player.x = 0;
 					player.y = 0;
 					break;
 				}
-				
+
 				if (up && !down) {
 					player.y = (int) (b.getY() + b.getHeight());
 					jtime = 49;
@@ -218,10 +223,23 @@ public class Game extends BasicGameState {
 			}
 		}
 		ArrayList<Item> items = map.getItems();
-		for(int i = 0;i<items.size();i++) {
-			if(hitbox.intersects(items.get(i).getHitbox())&&player.weap==0) {
+		for (int i = 0; i < items.size(); i++) {
+			if (hitbox.intersects(items.get(i).getHitbox()) && player.weap == 0) {
 				items.get(i).pickUp();
 				player.weaponPicked(items.get(i).id);
+			} else if (picking_up) {
+				items.get(i).pickUp();
+				player.weaponPicked(items.get(i).id);
+				picking_up = false;
+			}
+		}
+		
+		for(int i=0;i<bullets.size();i++) {
+			Bullet b = bullets.get(i);
+			if(hitbox.intersects(b.hitbox)) {
+				b.decay = 1;
+				player.v.dx+=b.v.dx;
+				player.v.dy+=b.v.dy;
 			}
 		}
 	}

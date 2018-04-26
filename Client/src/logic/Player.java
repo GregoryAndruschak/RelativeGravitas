@@ -5,6 +5,8 @@ import org.newdawn.slick.*;
 public class Player {
 	public int x = 0;
 	public int y = 0;
+	
+	public Vector v;
 
 	public int width = 76;
 	public int height = 100;
@@ -29,18 +31,16 @@ public class Player {
 	private Animation fall_left = new Animation();
 
 	public int health = 100;
-	public String weapon = "None";
-	public int weap = 1;
+	public String weapon = "Grav-pistol";
+	public int weap = 3;
 	
-	private int[] lkm_cd = new int[4];
-	private int[] pkm_cd = new int[4];
+	private int lkm_cd = 0;
+	private int pkm_cd = 0;
 
-	public Player(int x, int y, int color) throws SlickException {
-		for(int i=0;i<4;i++) {
-			lkm_cd[i]=0;
-			pkm_cd[i]=0;
-		}
-		
+	public Player(int x, int y, int color) throws SlickException{
+		this.v = new Vector(0,0,0,0,0);
+		v.setDx(0);
+		v.setDy(0);
 		this.x = x;
 		this.y = y;
 		Image s = new Image("res/player.png");
@@ -122,46 +122,104 @@ public class Player {
 
 	public boolean weaponReady(boolean mouse) {//true = lkm, false = pkm
 		if(mouse) {
-			if(lkm_cd[weap]==0)
+			if(lkm_cd==0)
 				return true;
 		}
 		else {
-			if(pkm_cd[weap]==0)
+			if(pkm_cd==0)
 				return true;
 		}
 		return false;
 	}
 	
 	public Bullet fireWeapon(Vector v, boolean lkm, int x, int y) throws SlickException {
-		Bullet b = new Bullet(weap,v,x,y);
-		if(lkm)
-			lkm_cd[weap] = 13;
+		Bullet b = new Bullet(0,v,x,y);
+		if(lkm) {
+			if(weap==2) {
+				b = new Bullet(3,v,x,y);
+				lkm_cd = 50;
+			}
+			if(weap==3) {
+				b = new Bullet(1,v,x,y);
+				lkm_cd = 25;
+			}
+			if(weap==4) {
+				b = new Bullet(2,v,x,y);
+				lkm_cd = 20;
+			}
+			if(weap==5) {
+				b = new Bullet(4,v,x,y);
+				lkm_cd = 60;
+			}
+			if(weap==6) {
+				b = new Bullet(5,v,x,y);
+				lkm_cd = 120;
+			}
+		}
+		else {
+			if(weap==2) {}
+			if(weap==3) {}
+			if(weap==4) {
+				b = new Bullet(0,v,x,y);
+				pkm_cd = 25;
+			}
+			if(weap==5) {}
+			if(weap==6) {}
+		}
 		return b;
 	}
 	
 	public void weaponCycle() {
-		if(lkm_cd[weap]!=0)
-			lkm_cd[weap]--;
-		if(pkm_cd[weap]!=0)
-			pkm_cd[weap]--;
+		if(lkm_cd!=0)
+			lkm_cd--;
+		if(pkm_cd!=0)
+			pkm_cd--;
 	}
 
 	public void weaponPicked(int id) {
 		weap = id;
-		if (id == 0) {
+		if (id == 2) {
 			this.weapon = "Wave Emitter";
 		}
-		if (id == 1) {
+		if (id == 3) {
 			this.weapon = "Grav-pistol";
 		}
-		if (id == 2) {
+		if (id == 4) {
 			this.weapon = "Temporal Rifle";
 		}
-		if (id == 3) {
+		if (id == 5) {
 			this.weapon = "Magnetic Pulsator";
 		}
-		if (id == 4) {
+		if (id == 6) {
 			this.weapon = "Transdimensional Railgun";
+		}
+	}
+	
+	public void normalize() {
+		if(v.dx>0) {
+			if(v.dx<1)
+				v.setDx(0);
+			else
+				v.addDx(-1);
+		}
+		else {
+			if(v.dx>-1)
+				v.setDx(0);
+			else
+				v.addDx(1);
+		}
+		
+		if(v.dy>0) {
+			if(v.dy<1)
+				v.setDy(0);
+			else
+				v.addDy(-1);
+		}
+		else {
+			if(v.dy>-1)
+				v.setDy(0);
+			else
+				v.addDy(1);
 		}
 	}
 }
