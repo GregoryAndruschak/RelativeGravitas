@@ -36,9 +36,9 @@ def login():
                 session['gamesalltime'] = highscore.gamesalltime
                 session['gameslastmonth'] = highscore.gameslastmonth
                 session['gameslastweek'] = highscore.gameslastweek
-                session['rating'] = highscore.rating
-                session['ratingmonth'] = highscore.ratingmonth
-                session['ratingweek'] = highscore.ratingweek
+                session['rating'] = highscore.raiting
+                session['ratingmonth'] = highscore.raitingmonth
+                session['ratingweek'] = highscore.raitingweek
                 session['winsalltime'] = highscore.winsalltime
                 session['winslastmonth'] = highscore.winslastmonth
                 session['winslastweek'] = highscore.winslastweek
@@ -81,9 +81,9 @@ def signup():
             session['gamesalltime'] = highscore.gamesalltime
             session['gameslastmonth'] = highscore.gameslastmonth
             session['gameslastweek'] = highscore.gameslastweek
-            session['rating'] = highscore.rating
-            session['ratingmonth'] = highscore.ratingmonth
-            session['ratingweek'] = highscore.ratingweek
+            session['rating'] = highscore.raiting
+            session['ratingmonth'] = highscore.raitingmonth
+            session['ratingweek'] = highscore.raitingweek
             session['winsalltime'] = highscore.winsalltime
             session['winslastmonth'] = highscore.winslastmonth
             session['winslastweek'] = highscore.winslastweek
@@ -119,9 +119,9 @@ def set_positions(h, user):
     session['gamesalltime_p'] = sorted(h, key=lambda hs: hs.gamesalltime).index(user) + 1
     session['gameslastmonth_p'] = sorted(h, key=lambda hs: hs.gameslastmonth).index(user) + 1
     session['gameslastweek_p'] = sorted(h, key=lambda hs: hs.gameslastweek).index(user) + 1
-    session['rating_p'] = sorted(h, key=lambda hs: hs.rating).index(user) + 1
-    session['ratingmonth_p'] = sorted(h, key=lambda hs: hs.ratingmonth).index(user) + 1
-    session['ratingweek_p'] = sorted(h, key=lambda hs: hs.ratingweek).index(user) + 1
+    session['rating_p'] = sorted(h, key=lambda hs: hs.raiting).index(user) + 1
+    session['ratingmonth_p'] = sorted(h, key=lambda hs: hs.raitingmonth).index(user) + 1
+    session['ratingweek_p'] = sorted(h, key=lambda hs: hs.raitingweek).index(user) + 1
     session['winsalltime_p'] = sorted(h, key=lambda hs: hs.winsalltime).index(user) + 1
     session['winslastmonth_p'] = sorted(h, key=lambda hs: hs.winslastmonth).index(user) + 1
     session['winslastweek_p'] = sorted(h, key=lambda hs: hs.winslastweek).index(user) + 1

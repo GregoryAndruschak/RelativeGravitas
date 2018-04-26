@@ -44,12 +44,12 @@ class Highscore(db.Model):
     gamesalltime = db.Column(db.Integer, nullable=False)
     gameslastmonth = db.Column(db.Integer, nullable=False)
     gameslastweek = db.Column(db.Integer, nullable=False)
-    rating = db.Column(db.Integer, nullable=False)
-    ratingmonth = db.Column(db.Integer, nullable=False)
-    ratingweek = db.Column(db.Integer, nullable=True)
-    winsalltime = db.Column(db.Integer, nullable=True)
-    winslastmonth = db.Column(db.Integer, nullable=True)
-    winslastweek = db.Column(db.Integer, nullable=True)
+    raiting = db.Column(db.Integer, nullable=False)
+    raitingmonth = db.Column(db.Integer, nullable=False)
+    raitingweek = db.Column(db.Integer, nullable=False)
+    winsalltime = db.Column(db.Integer, nullable=False)
+    winslastmonth = db.Column(db.Integer, nullable=False)
+    winslastweek = db.Column(db.Integer, nullable=False)
 
     def __init__(self, deathalltime, deathlastmonth, deathlastweek, gamesalltime, gameslastmonth, gameslastweek, rating, ratingmonth, ratingweek, winsalltime, winslastmonth, winslastweek):
         self.deathalltime = deathalltime
@@ -58,9 +58,9 @@ class Highscore(db.Model):
         self.gamesalltime = gamesalltime
         self.gameslastmonth = gameslastmonth
         self.gameslastweek = gameslastweek
-        self.rating = rating
-        self.ratingmonth = ratingmonth
-        self.ratingweek = ratingweek
+        self.raiting = rating
+        self.raitingmonth = ratingmonth
+        self.raitingweek = ratingweek
         self.winsalltime = winsalltime
         self.winslastmonth = winslastmonth
         self.winslastweek = winslastweek
