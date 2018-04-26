@@ -30,7 +30,7 @@ public class Player {
 
 	public int health = 100;
 	public String weapon = "None";
-	public int weap = 0;
+	public int weap = 1;
 	
 	private int[] lkm_cd = new int[4];
 	private int[] pkm_cd = new int[4];
@@ -132,8 +132,10 @@ public class Player {
 		return false;
 	}
 	
-	public Bullet fireWeapon(Vector v, boolean lkm) {
-		Bullet b = new Bullet(weap,v);
+	public Bullet fireWeapon(Vector v, boolean lkm, int x, int y) throws SlickException {
+		Bullet b = new Bullet(weap,v,x,y);
+		if(lkm)
+			lkm_cd[weap] = 13;
 		return b;
 	}
 	

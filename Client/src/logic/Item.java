@@ -50,7 +50,6 @@ public class Item {
 		else {
 			exists = true;
 		}
-
 	}
 
 	public void pickUp() {

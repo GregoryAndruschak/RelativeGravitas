@@ -74,15 +74,11 @@ public class Game extends BasicGameState {
 		
 		for(int i = 0;i<bullets.size();i++) {
 			Bullet b = bullets.get(i);
-			int speed = 10;
-			int wi = b.v.x - b.v.x1;
-			int he = b.v.y - b.v.y1;
-			int le = (int) Math.sqrt((wi*wi)+(he*he));
-			double ratio = speed/le;
-			b.x+=(int)wi*ratio;
-			b.y+=(int)he*ratio;
-			black.draw(b.x,b.y,10,10);
-			System.out.println(wi+" "+le+" "+he);
+			if(!b.cycle()) {
+				bullets.remove(i);
+				break;
+			}
+			bullets.get(i).draw(shift_x, shift_y);
 		}
 	}
 
@@ -161,9 +157,11 @@ public class Game extends BasicGameState {
 		player.standing = false;
 		collisions(player, map.hitboxes);
 		
-		if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			Vector v = new Vector(player.x,player.y,input.getAbsoluteMouseX(),input.getAbsoluteMouseY());
-			bullets.add(player.fireWeapon(v, true));
+		if(input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)&&player.weaponReady(true)) {
+			Vector v = new Vector(center_x+40,center_y+60,input.getMouseX(),input.getMouseY(),10);
+			Bullet b = player.fireWeapon(v, true, player.x, player.y);
+			bullets.add(b);
+			System.out.println(bullets.size());
 		}
 		
 		if(input.isKeyDown(Input.MOUSE_RIGHT_BUTTON)&&player.weaponReady(false)) {
@@ -174,6 +172,9 @@ public class Game extends BasicGameState {
 		shift_y = player.y - center_y;
 		
 		player.weaponCycle();
+		
+		
+		
 		
 		
 	}
