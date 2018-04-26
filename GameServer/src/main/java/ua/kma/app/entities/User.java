@@ -95,4 +95,15 @@ public class User {
 	public void setFriendOf(List<User> friendOf) {
 		this.friendOf = friendOf;
 	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", email='" + email + '\'' +
+				", highscores=" + highscores +
+				'}';
+	}
 }
