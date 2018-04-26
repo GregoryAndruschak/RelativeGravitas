@@ -13,14 +13,17 @@ import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import logic.Bullet;
 import logic.Item;
 import logic.Map;
 import logic.Player;
+import logic.Vector;
 
 public class Game extends BasicGameState {
 
 	Player player;
 	Image ph1;
+	Image black;
 
 	int center_x = 615;
 	int center_y = 320;
@@ -38,6 +41,8 @@ public class Game extends BasicGameState {
 	SpriteSheet pss;
 	
 	Map map;
+	
+	ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 	public Game(int state) {
 
@@ -47,6 +52,7 @@ public class Game extends BasicGameState {
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 		player = new Player(0,0,2);
 		ph1 = new Image("res/white.png");
+		black = new Image("res/black.png");
 		map = new Map();
 		gc.getGraphics().setColor(Color.black);
 		
@@ -65,6 +71,19 @@ public class Game extends BasicGameState {
 		
 		g.drawString("Health: " + player.health + "/100", 400, 20);
 		g.drawString("Weapon: " + player.weapon, 400, 50);
+		
+		for(int i = 0;i<bullets.size();i++) {
+			Bullet b = bullets.get(i);
+			int speed = 10;
+			int wi = b.v.x - b.v.x1;
+			int he = b.v.y - b.v.y1;
+			int le = (int) Math.sqrt((wi*wi)+(he*he));
+			double ratio = speed/le;
+			b.x+=(int)wi*ratio;
+			b.y+=(int)he*ratio;
+			black.draw(b.x,b.y,10,10);
+			System.out.println(wi+" "+le+" "+he);
+		}
 	}
 
 	@Override
@@ -141,9 +160,22 @@ public class Game extends BasicGameState {
 		physics(g, player);
 		player.standing = false;
 		collisions(player, map.hitboxes);
+		
+		if(input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			Vector v = new Vector(player.x,player.y,input.getAbsoluteMouseX(),input.getAbsoluteMouseY());
+			bullets.add(player.fireWeapon(v, true));
+		}
+		
+		if(input.isKeyDown(Input.MOUSE_RIGHT_BUTTON)&&player.weaponReady(false)) {
+			
+		}
 
 		shift_x = player.x - center_x;
 		shift_y = player.y - center_y;
+		
+		player.weaponCycle();
+		
+		
 	}
 
 	private void physics(int gravity, Player player) {
@@ -186,8 +218,9 @@ public class Game extends BasicGameState {
 		}
 		ArrayList<Item> items = map.getItems();
 		for(int i = 0;i<items.size();i++) {
-			if(hitbox.intersects(items.get(i).getHitbox())) {
+			if(hitbox.intersects(items.get(i).getHitbox())&&player.weap==0) {
 				items.get(i).pickUp();
+				player.weaponPicked(items.get(i).id);
 			}
 		}
 	}

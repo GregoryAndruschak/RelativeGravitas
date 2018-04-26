@@ -34,7 +34,7 @@ public class Map {
 		platforms.add(new Rectangle(200, 700, 300, 40));
 		platforms.add(new Rectangle(1500, 700, 300, 40));
 
-		items.add(new Item(450, 1050, 4));
+		items.add(new Item(450, 1050, 3));
 
 		hitboxes.addAll(borders);
 		hitboxes.addAll(platforms);
