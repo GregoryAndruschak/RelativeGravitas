@@ -1,5 +1,8 @@
 package ua.kma.app.game;
 
+
+import org.springframework.boot.jackson.JsonComponent;
+
 public class GameState {
 
     public GameState(String username, int x, int y, int deaths,boolean isJumping, boolean isStanding, boolean isFalling, boolean orientation, boolean isShooting, boolean isDead){

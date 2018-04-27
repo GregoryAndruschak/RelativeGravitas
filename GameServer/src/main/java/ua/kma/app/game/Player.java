@@ -1,5 +1,7 @@
 package ua.kma.app.game;
 
+import org.springframework.boot.jackson.JsonComponent;
+
 public class Player {
 
     private String username;
