@@ -58,8 +58,8 @@ public class Bullet {
 		}
 		if (id == 3) {
 			img = ss.getSubImage(60, 0, 8, 25);
-			width = 16;
-			height = 50;
+			width = 64;
+			height = 200;
 			decay = 20;
 			v.setV(8);
 		}
@@ -72,10 +72,11 @@ public class Bullet {
 		}
 		if (id == 5) {
 			img = ss.getSubImage(0, 12, 59, 13);
-			width = 900;
+			width = 650;
 			height = 40;
 			decay = 25;
 			v.setV(0);
+			img.setCenterOfRotation(0, 0);
 		}
 		
 		float degree = (float) Math.toDegrees(Math.atan(v.getTg()));

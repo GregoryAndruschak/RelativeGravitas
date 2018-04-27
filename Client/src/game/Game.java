@@ -32,6 +32,8 @@ public class Game extends BasicGameState {
 
 	int j_vel = 0;
 	boolean jumping = false;
+	
+	Rectangle dummy;
 
 	int g = 5;
 	int jtime = 0;
@@ -57,6 +59,7 @@ public class Game extends BasicGameState {
 		black = new Image("res/black.png");
 		map = new Map();
 		gc.getGraphics().setColor(Color.black);
+		dummy = new Rectangle(15,-100,75,100);
 
 	}
 
@@ -83,6 +86,8 @@ public class Game extends BasicGameState {
 			}
 			bullets.get(i).draw(shift_x, shift_y);
 		}
+		
+		black.draw(dummy.getX(),dummy.getY(),dummy.getWidth(),dummy.getHeight());
 	}
 
 	@Override
@@ -162,7 +167,11 @@ public class Game extends BasicGameState {
 
 		if (input.isMouseButtonDown(Input.MOUSE_LEFT_BUTTON) && player.weaponReady(true)) {
 			Vector v = new Vector(center_x + 38, center_y + 50, input.getMouseX(), input.getMouseY(), 10);
-			Bullet b = player.fireWeapon(v, true, player.x + 101, player.y + 30);
+			Bullet b;
+			if(v.right)
+				b = player.fireWeapon(v, true, player.x + 101, player.y + 30);
+			else
+				b = player.fireWeapon(v, true, player.x - 40, player.y + 30);
 			bullets.add(b);
 		}
 
@@ -246,7 +255,7 @@ public class Game extends BasicGameState {
 
 	@Override
 	public int getID() {
-		return 0;
+		return 1;
 	}
 
 }
